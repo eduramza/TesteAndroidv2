@@ -1,0 +1,40 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <!-- Login fragment -->
+    <dimen name="logo_height">70dp</dimen>
+    <dimen name="logo_width">125dp</dimen>
+    <dimen name="logo_mrg_top">39dp</dimen>
+    <dimen name="mrg_top_til_user">105dp</dimen>
+    <dimen name="mrg_top_til_password">21dp</dimen>
+    <dimen name="default_height_edits">50dp</dimen>
+    <dimen name="default_width_edits">342dp</dimen>
+    <dimen name="mrg_bottom_login">33dp</dimen>
+    <dimen name="button_login_height">62dp</dimen>
+    <dimen name="button_login_width">202dp</dimen>
+    
+    <!-- Home fragment -->
+    <dimen name="text_header_size">25sp</dimen>
+    <dimen name="padding_start_header">18dp</dimen>
+    <dimen name="padding_end_header">13dp</dimen>
+    <dimen name="padding_bottom_header">17dp</dimen>
+    <dimen name="text_info_size">12sp</dimen>
+    <dimen name="text_value_size">25sp</dimen>
+    <dimen name="mrg_top_infos">28dp</dimen>
+    <dimen name="mrg_top_values">6dp</dimen>
+    <dimen name="text_header_list_size">17sp</dimen>
+    <dimen name="mrg_top_header_list">14dp</dimen>
+    <dimen name="mrg_start_default">18dp</dimen>
+    <dimen name="mrg_end_list">16dp</dimen>
+
+    <!-- List Item -->
+    <dimen name="card_height">80dp</dimen>
+    <dimen name="text_title_item_size">16sp</dimen>
+    <dimen name="mrg_start_title_item">15dp</dimen>
+    <dimen name="mrg_end_title_item">16dp</dimen>
+    <dimen name="mrg_top_first_line">10dp</dimen>
+    <dimen name="text_date_item_size">12sp</dimen>
+    <dimen name="mrg_bottom_item_line">15dp</dimen>
+    <dimen name="text_conta_item_size">16sp</dimen>
+    <dimen name="text_valor_item_size">20sp</dimen>
+    <dimen name="mrg_card_item_vertical">10dp</dimen>
+</resources>
