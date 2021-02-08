@@ -19,8 +19,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_user"
-        android:layout_width="@dimen/default_width_edits"
-        android:layout_height="@dimen/default_height_edits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,15 +30,15 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_user"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="@dimen/default_width_edits"
+            android:layout_height="@dimen/default_height_edits" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_password"
-        android:layout_width="@dimen/default_width_edits"
-        android:layout_height="@dimen/default_height_edits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,8 +48,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="@dimen/default_width_edits"
+            android:layout_height="@dimen/default_height_edits" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,4 +62,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="@dimen/mrg_bottom_login" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

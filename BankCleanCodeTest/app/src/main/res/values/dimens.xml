@@ -6,7 +6,7 @@
     <dimen name="logo_mrg_top">39dp</dimen>
     <dimen name="mrg_top_til_user">105dp</dimen>
     <dimen name="mrg_top_til_password">21dp</dimen>
-    <dimen name="default_height_edits">50dp</dimen>
+    <dimen name="default_height_edits">60dp</dimen>
     <dimen name="default_width_edits">342dp</dimen>
     <dimen name="mrg_bottom_login">33dp</dimen>
     <dimen name="button_login_height">62dp</dimen>
