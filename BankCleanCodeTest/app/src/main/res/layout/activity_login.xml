@@ -26,7 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_logo"
         android:layout_marginTop="@dimen/mrg_top_til_user"
-        android:hint="@string/username">
+        android:hint="@string/username"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_user"
@@ -44,7 +45,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_user"
         android:layout_marginTop="@dimen/mrg_top_til_password"
-        android:hint="@string/password">
+        android:hint="@string/password"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_password"

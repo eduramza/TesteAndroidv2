@@ -10,6 +10,10 @@ data class UserResponse(
     val userAccount: UserAccount
 ) {
     class Error(
+        @SerializedName("code")
+        var code: Int = 0,
+        @SerializedName("message")
+        val message: String
     )
 
     data class UserAccount(

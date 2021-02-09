@@ -10,8 +10,10 @@ interface LoginContract {
     interface View {
         fun showLoading()
         fun hideLoading()
-        fun showInvalidPassword()
-        fun showInvalidUsername()
+        fun showErrorInvalidPassword()
+        fun showErrorInvalidUsername()
+        fun showErrorLoginRequest(message: String) {
+        }
     }
 
     interface Presenter {
@@ -25,7 +27,7 @@ interface LoginContract {
     }
 
     interface InteractorOutput{
-        fun onLoginSuccess(data: UserResponse)
-        fun onLoginError()
+        fun onRequestSuccess(data: UserResponse)
+        fun onRequestError()
     }
 }

@@ -19,4 +19,6 @@
     <string name="r_1_000_00">R$1.000,00</string>
     <string name="password">Password</string>
     <string name="logo_bank">Logo: Bank</string>
+    <string name="error_invalid_username">E-mail ou CPF não cadastrados ou inválidos</string>
+    <string name="error_invalid_password">A senha não atende os requisitos</string>
 </resources>

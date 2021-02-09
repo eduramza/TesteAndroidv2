@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         val TAG = "LoginActivity"
     }
 
-    private final var presenter: LoginContract.Presenter?= null
+    private var presenter: LoginContract.Presenter?= null
     private val editUsername: TextInputEditText? by lazy { edit_user }
     private val editPassword: TextInputEditText? by lazy { edit_password }
     private val btnLogin: Button? by lazy { btn_login }
@@ -26,7 +26,14 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         setContentView(R.layout.activity_login)
 
         presenter = LoginPresenter(this)
+        setListeners()
+
+    }
+
+    private fun setListeners(){
         btnLogin?.setOnClickListener {
+            til_user.error = ""
+            til_password.error = ""
             presenter?.loginButtonClick(
                 editUsername?.text.toString(),
                 editPassword?.text.toString())
@@ -52,11 +59,15 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         //TODO("Not yet implemented")
     }
 
-    override fun showInvalidPassword() {
-        Toast.makeText(this, "Senha inválida", Toast.LENGTH_SHORT).show()
+    override fun showErrorInvalidPassword() {
+        til_password.error = getString(R.string.error_invalid_password)
     }
 
-    override fun showInvalidUsername(){
-        Toast.makeText(this, "Usuário deve ser cpf ou e-mail valido", Toast.LENGTH_SHORT).show()
+    override fun showErrorInvalidUsername(){
+        til_user.error = getString(R.string.error_invalid_username)
+    }
+
+    override fun showErrorLoginRequest(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

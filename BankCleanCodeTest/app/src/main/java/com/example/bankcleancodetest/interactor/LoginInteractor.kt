@@ -1,7 +1,6 @@
 package com.example.bankcleancodetest.interactor
 
 import com.example.bankcleancodetest.LoginContract
-import com.example.bankcleancodetest.entity.UserRequest
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.FuelError

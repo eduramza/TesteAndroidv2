@@ -1,6 +1,5 @@
 package com.example.bankcleancodetest.presenter
 
-import android.util.Log
 import com.example.bankcleancodetest.LoginContract
 import com.example.bankcleancodetest.entity.UserResponse
 import com.example.bankcleancodetest.interactor.LoginInteractor
@@ -9,7 +8,8 @@ import com.example.bankcleancodetest.isEmail
 import com.example.bankcleancodetest.validPassword
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+
+const val DEFAULT_ERROR_CODE = 0
 
 class LoginPresenter(private var view: LoginContract.View?): LoginContract.Presenter,
     LoginContract.InteractorOutput {
@@ -20,32 +20,34 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
         view?.showLoading()
         if ( username.isCPF() || username.isEmail() ){
             if (password.validPassword()){
-                interactor?.loadUserLogged(username, password) { result ->
-                    when(result){
-                        is Result.Failure -> { this.onLoginError() }
-                        is Result.Success -> {
-                            val userObj = result.get().obj()
-                            val type = object: TypeToken<UserResponse>() {}.type
-                            //Problemas para converter a resposta
-                            val response: UserResponse =
-                                Gson().fromJson(userObj.getJSONObject("userAccount").toString(), type)
-
-                            this.onLoginSuccess(response)
-                        }
-                    }
-
-                }
+                doLoginRequest(username, password)
             } else {
-                view?.showInvalidPassword()
+                view?.showErrorInvalidPassword()
             }
         } else {
-            view?.showInvalidUsername()
+            view?.showErrorInvalidUsername()
+        }
+    }
+
+    private fun doLoginRequest(username: String, password: String) {
+        interactor?.loadUserLogged(username, password) { result ->
+            when(result){
+                is Result.Failure -> { this.onRequestError() }
+                is Result.Success -> {
+                    val userObj = result.get().obj()
+                    val response: UserResponse =
+                        Gson().fromJson(userObj.toString(), UserResponse::class.java)
+
+                    this.onRequestSuccess(response)
+                }
+            }
+
         }
     }
 
     override fun onViewCreated() {
         view?.showLoading()
-        //verificar se o usuário ta logado via shared preferences
+        //TODO verificar se o usuário ta logado via shared preferences
     }
 
     override fun onDestoy() {
@@ -53,17 +55,25 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
         interactor = null
     }
 
-    override fun onLoginSuccess(data: UserResponse) {
+    override fun onRequestSuccess(data: UserResponse) {
         view?.hideLoading()
-        Log.d("Login", "Sucesso")
-        //validar se a resposta veio no objeto de erro e enganou-nos
-        //publicar o sucesso ou abrir a proxima tela
+        if ( !responseWithError(data.error) ){
+            saveUserInSession(data.userAccount)
+            //TODO view open new activity
+        } else {
+            view?.showErrorLoginRequest(data.error.message)
+        }
     }
 
-    override fun onLoginError() {
-        view?.hideLoading()
-        Log.d("Login", "Problema no login")
+    private fun responseWithError(error: UserResponse.Error) = error.code != DEFAULT_ERROR_CODE
 
+    private fun saveUserInSession(userAccount: UserResponse.UserAccount){
+
+    }
+
+    override fun onRequestError() {
+        view?.hideLoading()
+        //TODO case request dont return 200
     }
 
 }
