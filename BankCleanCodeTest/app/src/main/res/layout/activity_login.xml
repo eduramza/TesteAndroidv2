@@ -32,7 +32,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_user"
             android:layout_width="@dimen/default_width_edits"
-            android:layout_height="@dimen/default_height_edits" />
+            android:layout_height="@dimen/default_height_edits"
+            android:text="44064153863"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,7 +52,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_password"
             android:layout_width="@dimen/default_width_edits"
-            android:layout_height="@dimen/default_height_edits" />
+            android:layout_height="@dimen/default_height_edits"
+            android:text="Ed.8"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

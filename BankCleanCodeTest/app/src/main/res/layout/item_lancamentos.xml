@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/card_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:layout_marginVertical="@dimen/mrg_card_item_vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linear_item_first_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/mrg_start_title_item"
+            android:layout_marginEnd="@dimen/mrg_end_title_item"
+            android:layout_marginTop="@dimen/mrg_top_first_line">
+
+            <TextView
+                android:id="@+id/tv_lancamento_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pagamento"
+                android:textColor="@color/textInfoColor"
+                android:textSize="@dimen/text_title_item_size"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_lancamento_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="@dimen/text_date_item_size"
+                android:textColor="@color/textInfoColor"
+                android:gravity="end"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_item_second_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/mrg_start_title_item"
+            android:layout_marginEnd="@dimen/mrg_end_title_item"
+            android:layout_marginBottom="@dimen/mrg_bottom_item_line">
+
+            <TextView
+                android:id="@+id/tv_lancamento_conta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/conta_de_luz"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/text_conta_item_size"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/tv_lancamento_valor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/r_1_000_00"
+                android:textSize="@dimen/text_valor_item_size"
+                android:textColor="@color/textPrimary"
+                android:gravity="end"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

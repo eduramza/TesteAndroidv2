@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_start_header"
+        android:paddingEnd="@dimen/padding_end_header"
+        android:paddingBottom="17dp"
+        android:background="@color/primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linear_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/textSecundary"
+                android:gravity="center_vertical"
+                android:text="Jose da Silva Test"
+                android:textSize="@dimen/text_header_size"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/img_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logout_white" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_info_conta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/conta"
+            android:textSize="@dimen/text_info_size"
+            android:textColor="@color/textSecundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear_header"
+            android:layout_marginTop="@dimen/mrg_top_infos" />
+        <TextView
+            android:id="@+id/tv_valor_conta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2050 / 01.111222-4"
+            android:textSize="@dimen/text_value_size"
+            android:textColor="@color/textSecundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_info_conta"
+            android:layout_marginTop="@dimen/mrg_top_values" />
+
+        <TextView
+            android:id="@+id/tv_info_saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/saldo"
+            android:textSize="@dimen/text_info_size"
+            android:textColor="@color/textSecundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_valor_conta"
+            android:layout_marginTop="@dimen/mrg_top_infos" />
+        <TextView
+            android:id="@+id/tv_valor_saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R$ 1.000,00"
+            android:textSize="@dimen/text_value_size"
+            android:textColor="@color/textSecundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_info_saldo"
+            android:layout_marginTop="@dimen/mrg_top_values" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_header_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraint_header"
+        android:text="@string/recentes"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_header_list_size"
+        android:layout_marginTop="@dimen/mrg_top_header_list"
+        android:layout_marginStart="@dimen/mrg_start_default" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_lancamentos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_lancamentos"
+        tools:itemCount="12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_header_list"
+        android:layout_marginStart="@dimen/mrg_start_default"
+        android:layout_marginEnd="@dimen/mrg_end_list"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

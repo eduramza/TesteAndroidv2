@@ -12,8 +12,7 @@ interface LoginContract {
         fun hideLoading()
         fun showErrorInvalidPassword()
         fun showErrorInvalidUsername()
-        fun showErrorLoginRequest(message: String) {
-        }
+        fun showErrorLoginRequest(message: String)
     }
 
     interface Presenter {

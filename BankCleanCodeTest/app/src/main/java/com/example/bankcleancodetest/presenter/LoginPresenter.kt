@@ -1,20 +1,20 @@
 package com.example.bankcleancodetest.presenter
 
-import com.example.bankcleancodetest.LoginContract
+import com.example.bankcleancodetest.*
 import com.example.bankcleancodetest.entity.UserResponse
 import com.example.bankcleancodetest.interactor.LoginInteractor
-import com.example.bankcleancodetest.isCPF
-import com.example.bankcleancodetest.isEmail
-import com.example.bankcleancodetest.validPassword
+import com.example.bankcleancodetest.view.MainActivity
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
+import ru.terrakok.cicerone.Router
 
 const val DEFAULT_ERROR_CODE = 0
 
 class LoginPresenter(private var view: LoginContract.View?): LoginContract.Presenter,
     LoginContract.InteractorOutput {
 
-    private var interactor:LoginContract.Interactor? = LoginInteractor()
+    private var interactor: LoginContract.Interactor? = LoginInteractor()
+    private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
 
     override fun loginButtonClick(username: String, password: String) {
         view?.showLoading()
@@ -59,7 +59,7 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
         view?.hideLoading()
         if ( !responseWithError(data.error) ){
             saveUserInSession(data.userAccount)
-            //TODO view open new activity
+            router?.navigateTo(MainActivity.TAG, data.userAccount)
         } else {
             view?.showErrorLoginRequest(data.error.message)
         }
@@ -68,7 +68,7 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
     private fun responseWithError(error: UserResponse.Error) = error.code != DEFAULT_ERROR_CODE
 
     private fun saveUserInSession(userAccount: UserResponse.UserAccount){
-
+        //TODO Save user using shared preferences
     }
 
     override fun onRequestError() {
