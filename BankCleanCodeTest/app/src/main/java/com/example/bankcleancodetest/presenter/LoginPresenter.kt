@@ -1,6 +1,7 @@
 package com.example.bankcleancodetest.presenter
 
 import com.example.bankcleancodetest.*
+import com.example.bankcleancodetest.Constants.Companion.DEFAULT_ERROR_CODE
 import com.example.bankcleancodetest.entity.UserResponse
 import com.example.bankcleancodetest.interactor.LoginInteractor
 import com.example.bankcleancodetest.view.MainActivity
@@ -8,12 +9,10 @@ import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import ru.terrakok.cicerone.Router
 
-const val DEFAULT_ERROR_CODE = 0
-
 class LoginPresenter(private var view: LoginContract.View?): LoginContract.Presenter,
-    LoginContract.InteractorOutput {
+    LoginContract.InteractorLoginOutput {
 
-    private var interactor: LoginContract.Interactor? = LoginInteractor()
+    private var interactorLogin: LoginContract.InteractorLogin? = LoginInteractor()
     private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
 
     override fun loginButtonClick(username: String, password: String) {
@@ -30,7 +29,7 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
     }
 
     private fun doLoginRequest(username: String, password: String) {
-        interactor?.loadUserLogged(username, password) { result ->
+        interactorLogin?.loadUserLogged(username, password) { result ->
             when(result){
                 is Result.Failure -> { this.onRequestError() }
                 is Result.Success -> {
@@ -52,7 +51,7 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
 
     override fun onDestoy() {
         view = null
-        interactor = null
+        interactorLogin = null
     }
 
     override fun onRequestSuccess(data: UserResponse) {

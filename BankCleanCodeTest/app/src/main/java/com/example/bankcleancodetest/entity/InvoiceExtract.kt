@@ -24,7 +24,7 @@ data class InvoiceExtract(
         @SerializedName("title")
         val title: String,
         @SerializedName("value")
-        val value: Int
+        val value: Double
     )
 
 }

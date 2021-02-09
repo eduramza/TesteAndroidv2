@@ -21,11 +21,11 @@ interface LoginContract {
         fun onDestoy()
     }
 
-    interface Interactor{
+    interface InteractorLogin{
         fun loadUserLogged(username: String, password: String, interactorOutput: (result: Result<Json, FuelError>) -> Unit)
     }
 
-    interface InteractorOutput{
+    interface InteractorLoginOutput{
         fun onRequestSuccess(data: UserResponse)
         fun onRequestError()
     }
