@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity">
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_login"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <ImageView
         android:id="@+id/img_logo"
         android:layout_width="@dimen/logo_width"
@@ -32,8 +43,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_user"
             android:layout_width="@dimen/default_width_edits"
-            android:layout_height="@dimen/default_height_edits"
-            android:text="44064153863"/>
+            android:layout_height="@dimen/default_height_edits"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,7 +63,7 @@
             android:id="@+id/edit_password"
             android:layout_width="@dimen/default_width_edits"
             android:layout_height="@dimen/default_height_edits"
-            android:text="Ed.8"/>
+            android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,6 +1,7 @@
 package com.example.bankcleancodetest
 
-import junit.framework.Assert.*
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
 import org.junit.Test
 
 class ExtensionsTest {

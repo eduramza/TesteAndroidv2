@@ -1,28 +1,31 @@
 package com.example.bankcleancodetest.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.ContentLoadingProgressBar
+import androidx.preference.PreferenceManager
 import com.example.bankcleancodetest.BaseApplication
 import com.example.bankcleancodetest.LoginContract
 import com.example.bankcleancodetest.R
 import com.example.bankcleancodetest.entity.UserResponse
 import com.example.bankcleancodetest.presenter.LoginPresenter
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_login.*
 import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.commands.Command
 import ru.terrakok.cicerone.commands.Forward
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     companion object {
-        val TAG = "LoginActivity"
+        const val TAG = "LoginActivity"
     }
 
     private val navigator: Navigator? by lazy {
@@ -49,6 +52,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     private val editUsername: TextInputEditText? by lazy { edit_user }
     private val editPassword: TextInputEditText? by lazy { edit_password }
     private val btnLogin: Button? by lazy { btn_login }
+    private val tilUser: TextInputLayout? by lazy { til_user }
+    private val tilPassword: TextInputLayout? by lazy { til_password }
+    private val progressBar: ContentLoadingProgressBar? by lazy { progress_login }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +67,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     private fun setListeners(){
         btnLogin?.setOnClickListener {
-            til_user.error = ""
-            til_password.error = ""
+            tilUser?.error = ""
+            tilPassword?.error = ""
             presenter?.loginButtonClick(
                 editUsername?.text.toString(),
                 editPassword?.text.toString())
@@ -71,7 +77,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun onResume() {
         super.onResume()
-        presenter?.onViewCreated()
+        presenter?.onViewCreated(PreferenceManager.getDefaultSharedPreferences(this))
         BaseApplication.INSTANCE.cicerone.navigatorHolder.setNavigator(navigator)
     }
 
@@ -86,23 +92,28 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun showLoading() {
-        //TODO("Not yet implemented")
+        progressBar?.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        //TODO("Not yet implemented")
+        progressBar?.visibility = View.GONE
     }
 
     override fun showErrorInvalidPassword() {
-        til_password.error = getString(R.string.error_invalid_password)
+        tilPassword?.error = getString(R.string.error_invalid_password)
     }
 
     override fun showErrorInvalidUsername(){
-        til_user.error = getString(R.string.error_invalid_username)
+        tilUser?.error = getString(R.string.error_invalid_username)
     }
 
     override fun showErrorLoginRequest(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setUserData(sharedUsername: String, sharedPassword: String) {
+        editUsername?.setText(sharedUsername)
+        editPassword?.setText(sharedPassword)
     }
 
 }

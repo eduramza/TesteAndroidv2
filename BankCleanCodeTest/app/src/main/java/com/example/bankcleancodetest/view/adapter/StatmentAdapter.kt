@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bankcleancodetest.R
 import com.example.bankcleancodetest.convertToBRL
 import com.example.bankcleancodetest.entity.InvoiceExtract
+import com.example.bankcleancodetest.formatDate
 import kotlinx.android.synthetic.main.item_lancamentos.view.*
 
 class StatmentAdapter(
@@ -38,7 +39,7 @@ class StatmentAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         dataList?.let {
             holder.tvTitle?.text = it[position].title
-            holder.tvDate?.text = it[position].date
+            holder.tvDate?.text = it[position].date.formatDate()
             holder.tvAccount?.text = it[position].desc
             holder.tvValue?.text = it[position].value.convertToBRL()
         }

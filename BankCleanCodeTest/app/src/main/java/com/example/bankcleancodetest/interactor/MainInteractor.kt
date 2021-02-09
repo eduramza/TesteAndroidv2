@@ -2,7 +2,6 @@ package com.example.bankcleancodetest.interactor
 
 import com.example.bankcleancodetest.Constants.Companion.BASE_STATMENT_URL
 import com.example.bankcleancodetest.MainContract
-import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.core.FuelError

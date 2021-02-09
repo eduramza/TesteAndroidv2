@@ -1,12 +1,11 @@
 package com.example.bankcleancodetest.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankcleancodetest.BaseApplication
@@ -14,8 +13,10 @@ import com.example.bankcleancodetest.MainContract
 import com.example.bankcleancodetest.R
 import com.example.bankcleancodetest.entity.InvoiceExtract
 import com.example.bankcleancodetest.entity.UserResponse
+import com.example.bankcleancodetest.formatAccountNumber
 import com.example.bankcleancodetest.presenter.MainPresenter
 import com.example.bankcleancodetest.view.adapter.StatmentAdapter
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.commands.Command
@@ -24,7 +25,7 @@ import ru.terrakok.cicerone.commands.Forward
 class MainActivity : AppCompatActivity(), MainContract.View {
 
     companion object {
-        val TAG = "MainActivity"
+        const val TAG = "MainActivity"
     }
 
     private val navigator: Navigator? by lazy {
@@ -72,21 +73,17 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         recyclerView?.adapter = StatmentAdapter(null)
     }
 
-    override fun doLogoff() {
-        //TODO remover o cliente da sessão
-    }
-
     override fun showLoading() {
-        //TODO("Not yet implemented")
+       // TODO mostrar barra de progresso para a lista
     }
 
     override fun hideLoading() {
-        //TODO("Not yet implemented")
+       // TODO Esconder barra de progresso para a lista
     }
 
     override fun showUserDetails(name: String, account: String, agency: String, balance: String) {
         tvUsername?.text = name
-        tvAccountValue?.text = "$account / $agency"
+        tvAccountValue?.text = "$account / ${agency.formatAccountNumber()}"
         tvBalance?.text = balance
     }
 

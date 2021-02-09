@@ -1,5 +1,6 @@
 package com.example.bankcleancodetest
 
+import android.content.SharedPreferences
 import com.example.bankcleancodetest.entity.UserResponse
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.core.FuelError
@@ -13,11 +14,12 @@ interface LoginContract {
         fun showErrorInvalidPassword()
         fun showErrorInvalidUsername()
         fun showErrorLoginRequest(message: String)
+        fun setUserData(sharedUsername: String, sharedPassword: String)
     }
 
     interface Presenter {
         fun loginButtonClick(username: String, password: String)
-        fun onViewCreated()
+        fun onViewCreated(sharedPref: SharedPreferences?)
         fun onDestoy()
     }
 

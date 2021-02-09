@@ -1,6 +1,5 @@
 package com.example.bankcleancodetest.presenter
 
-import org.junit.Assert.*
 import org.junit.Test
 
 class LoginPresenterTest{

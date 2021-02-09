@@ -34,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:textColor="@color/textSecundary"
                 android:gravity="center_vertical"
-                android:text="Jose da Silva Test"
+                android:text="Nome de Teste"
                 android:textSize="@dimen/text_header_size"
                 android:layout_weight="1" />
 

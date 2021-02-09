@@ -1,7 +1,10 @@
 package com.example.bankcleancodetest.presenter
 
+import android.content.SharedPreferences
 import com.example.bankcleancodetest.*
 import com.example.bankcleancodetest.Constants.Companion.DEFAULT_ERROR_CODE
+import com.example.bankcleancodetest.Constants.Companion.SHARED_PASSWORD_KEY
+import com.example.bankcleancodetest.Constants.Companion.SHARED_USERNAME_KEY
 import com.example.bankcleancodetest.entity.UserResponse
 import com.example.bankcleancodetest.interactor.LoginInteractor
 import com.example.bankcleancodetest.view.MainActivity
@@ -14,6 +17,7 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
 
     private var interactorLogin: LoginContract.InteractorLogin? = LoginInteractor()
     private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
+    private var preferences: SharedPreferences? = null
 
     override fun loginButtonClick(username: String, password: String) {
         view?.showLoading()
@@ -38,15 +42,33 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
                         Gson().fromJson(userObj.toString(), UserResponse::class.java)
 
                     this.onRequestSuccess(response)
+                    saveLoginData(username, password)
                 }
             }
 
         }
     }
 
-    override fun onViewCreated() {
+    private fun saveLoginData(username: String, password: String) {
+        val editor = preferences?.edit()
+        editor?.putString(SHARED_USERNAME_KEY, username)
+        editor?.putString(SHARED_PASSWORD_KEY, password)
+        editor?.apply()
+    }
+
+    override fun onViewCreated(sharedPref: SharedPreferences?) {
         view?.showLoading()
-        //TODO verificar se o usuário ta logado via shared preferences
+        preferences = sharedPref
+        verifyUserIsSaved()
+        view?.hideLoading()
+    }
+
+    private fun verifyUserIsSaved(){
+        val sharedUsername = preferences?.getString(SHARED_USERNAME_KEY,"")
+        val sharedPassword = preferences?.getString(SHARED_PASSWORD_KEY, "")
+        if ( !sharedUsername.isNullOrBlank() && !sharedPassword.isNullOrBlank()){
+            view?.setUserData(sharedUsername, sharedPassword)
+        }
     }
 
     override fun onDestoy() {
@@ -57,18 +79,17 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
     override fun onRequestSuccess(data: UserResponse) {
         view?.hideLoading()
         if ( !responseWithError(data.error) ){
-            saveUserInSession(data.userAccount)
-            router?.navigateTo(MainActivity.TAG, data.userAccount)
+            openMainActivity(data.userAccount)
         } else {
             view?.showErrorLoginRequest(data.error.message)
         }
     }
 
-    private fun responseWithError(error: UserResponse.Error) = error.code != DEFAULT_ERROR_CODE
-
-    private fun saveUserInSession(userAccount: UserResponse.UserAccount){
-        //TODO Save user using shared preferences
+    private fun openMainActivity(userAccount: UserResponse.UserAccount) {
+        router?.navigateTo(MainActivity.TAG, userAccount)
     }
+
+    private fun responseWithError(error: UserResponse.Error) = error.code != DEFAULT_ERROR_CODE
 
     override fun onRequestError() {
         view?.hideLoading()

@@ -9,7 +9,6 @@ import com.github.kittinunf.result.Result
 interface MainContract {
 
     interface View{
-        fun doLogoff()
         fun showLoading()
         fun hideLoading()
         fun showUserDetails(name: String, account: String, agency:String, balance: String)
@@ -28,8 +27,4 @@ interface MainContract {
                                interactorMainOutput: (result: Result<Json, FuelError>) -> Unit)
     }
 
-    interface InteractorMainOutput{
-        fun onSuccess(data: InvoiceExtract)
-        fun onEFailure()
-    }
 }
