@@ -1,6 +1,7 @@
 package com.example.bankcleancodetest.presenter
 
 import android.content.SharedPreferences
+import androidx.annotation.VisibleForTesting
 import com.example.bankcleancodetest.*
 import com.example.bankcleancodetest.Constants.Companion.DEFAULT_ERROR_CODE
 import com.example.bankcleancodetest.Constants.Companion.SHARED_PASSWORD_KEY
@@ -12,10 +13,12 @@ import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import ru.terrakok.cicerone.Router
 
-class LoginPresenter(private var view: LoginContract.View?): LoginContract.Presenter,
+class LoginPresenter(private var view: LoginContract.View?,
+                     private var interactorLogin: LoginContract.InteractorLogin? = LoginInteractor()
+): LoginContract.Presenter,
     LoginContract.InteractorLoginOutput {
 
-    private var interactorLogin: LoginContract.InteractorLogin? = LoginInteractor()
+
     private val router: Router? by lazy { BaseApplication.INSTANCE.cicerone.router }
     private var preferences: SharedPreferences? = null
 
@@ -32,7 +35,7 @@ class LoginPresenter(private var view: LoginContract.View?): LoginContract.Prese
         }
     }
 
-    private fun doLoginRequest(username: String, password: String) {
+    override fun doLoginRequest(username: String, password: String) {
         interactorLogin?.loadUserLogged(username, password) { result ->
             when(result){
                 is Result.Failure -> { this.onRequestError() }

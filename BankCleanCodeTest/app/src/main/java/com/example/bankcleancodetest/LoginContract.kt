@@ -21,6 +21,7 @@ interface LoginContract {
         fun loginButtonClick(username: String, password: String)
         fun onViewCreated(sharedPref: SharedPreferences?)
         fun onDestoy()
+        fun doLoginRequest(username: String, password: String)
     }
 
     interface InteractorLogin{
