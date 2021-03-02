@@ -28,9 +28,11 @@ class LoginPresenter(private var view: LoginContract.View?,
             if (password.validPassword()){
                 doLoginRequest(username, password)
             } else {
+                view?.hideLoading()
                 view?.showErrorInvalidPassword()
             }
         } else {
+            view?.hideLoading()
             view?.showErrorInvalidUsername()
         }
     }
